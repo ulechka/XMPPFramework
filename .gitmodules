@@ -1,0 +1,12 @@
+[submodule "Carthage/Checkouts/CocoaAsyncSocket"]
+	path = Carthage/Checkouts/CocoaAsyncSocket
+	url = https://github.com/robbiehanson/CocoaAsyncSocket.git
+[submodule "Carthage/Checkouts/CocoaLumberjack"]
+	path = Carthage/Checkouts/CocoaLumberjack
+	url = https://github.com/CocoaLumberjack/CocoaLumberjack.git
+[submodule "Carthage/Checkouts/KissXML"]
+	path = Carthage/Checkouts/KissXML
+	url = https://github.com/robbiehanson/KissXML.git
+[submodule "Carthage/Checkouts/libidn-framework"]
+	path = Carthage/Checkouts/libidn-framework
+	url = https://github.com/chrisballinger/libidn-framework.git

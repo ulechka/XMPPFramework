@@ -19,6 +19,30 @@
 
 @implementation XMPPMessageArchiveManagement
 
+- (void)retrieveMessageArchiveWithIq:(XMPPIQ *)iq query:(DDXMLElement *)queryElement {
+    dispatch_block_t block = ^{
+        
+        self.queryID = [XMPPStream generateUUID];
+        [queryElement addAttributeWithName:@"queryid" stringValue:self.queryID];
+        [iq addChild:queryElement];
+        
+        [xmppIDTracker addElement:iq
+                           target:self
+                         selector:@selector(handleMessageArchiveIQ:withInfo:)
+                          timeout:60];
+        
+        [xmppStream sendElement:iq];
+        
+    };
+    
+    if (dispatch_get_specific(moduleQueueTag)) {
+        block();
+    } else {
+        dispatch_sync(moduleQueue, block);
+    }
+}
+
+
 - (void)retrieveMessageArchiveWithFields:(NSArray *)fields withResultSet:(XMPPResultSet *)resultSet {
 	dispatch_block_t block = ^{
 
