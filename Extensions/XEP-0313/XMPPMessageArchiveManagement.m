@@ -42,6 +42,23 @@ static NSString *const QueryIdAttributeName = @"queryid";
     return self;
 }
 
+- (void)retrieveMessageArchiveWithIq:(nullable XMPPIQ *)iq
+							   query:(nullable DDXMLElement *)queryElement
+{
+	[self performBlockAsync:^{
+		NSString *queryID = [XMPPStream generateUUID];
+		[queryElement addAttributeWithName:@"queryid" stringValue:queryID];
+		[iq addChild:queryElement];
+
+		[self.xmppIDTracker addElement:iq
+								target:self
+							  selector:@selector(handleMessageArchiveIQ:withInfo:)
+							   timeout:60];
+
+		[self->xmppStream sendElement:iq];
+	}];
+}
+
 - (NSInteger)resultAutomaticPagingPageSize
 {
     __block NSInteger result = NO;

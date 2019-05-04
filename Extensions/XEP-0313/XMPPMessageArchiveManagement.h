@@ -28,6 +28,9 @@ extern NSString *const XMLNS_XMPP_MAM;
  */
 @property (readwrite, assign) NSInteger resultAutomaticPagingPageSize;
 
+- (void)retrieveMessageArchiveWithIq:(nullable XMPPIQ *)iq
+                               query:(nullable DDXMLElement *)queryElement;
+
 - (void)retrieveMessageArchiveWithFields:(nullable NSArray<NSXMLElement*> *)fields
                            withResultSet:(nullable XMPPResultSet *)resultSet;
 
